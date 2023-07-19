@@ -57,7 +57,7 @@ func main() {
 		}
 	}
 
-	// hasil result
+	// result
 	// Product-1 = 40
 	// Product-2 = 20
 	// Product-3 = 90
