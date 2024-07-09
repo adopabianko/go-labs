@@ -11,6 +11,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redsync/redsync/v4"
 	"github.com/go-redsync/redsync/v4/redis/goredis/v9"
@@ -25,14 +26,14 @@ type Config struct {
 }
 
 func main() {
-	// Init()
-
 	router := gin.Default()
-	// router.GET("/orders", GetOrders())
 	c := Config{
 		DB:    dbConnection(),
 		Redis: redisConnection(),
 	}
+
+	// https://github.com/gin-contrib/pprof
+	pprof.Register(router)
 
 	router.GET("/orders", c.GetOrders)
 	router.POST("/order", c.CreateOrder)

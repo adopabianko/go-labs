@@ -3,6 +3,7 @@ module adopabianko/redis-lock
 go 1.22.4
 
 require (
+	github.com/gin-contrib/pprof v1.5.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-redsync/redsync/v4 v4.13.0
 	github.com/jmoiron/sqlx v1.4.0
