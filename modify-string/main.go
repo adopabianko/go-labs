@@ -26,10 +26,10 @@ func ModifyString(str string) string {
 		}
 	}
 
-	return ReverseString(strings.Join(strs, ""))
+	return reverseString(strings.Join(strs, ""))
 }
 
-func ReverseString(str string) string {
+func reverseString(str string) string {
 	runes := []rune(str)
 	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
 		runes[i], runes[j] = runes[j], runes[i]
