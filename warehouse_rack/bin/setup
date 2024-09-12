@@ -1,0 +1,9 @@
+# Add script to:
+# * Install dependencies
+# * Build/Compile
+# * Run Test Suit to validate
+#
+# After this is run, bin/warehouse_rack
+# should Just Work.
+
+go build -o src/build/warehouse_rack src/warehouse_rack.go

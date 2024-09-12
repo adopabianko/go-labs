@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Add script to run program here.
+# Complete bin/setup so that after it is
+# run, bin/warehouse_rack can be used to launch
+# it.
+
+# This variable contains absolute path of this `warehouse_rack` script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+$DIR/../src/build/warehouse_rack $1
+
+# Use DIR variable above to pinpoint your jar/executable/main class
+# e.g.
+# - if java
+#   java -cp $DIR/../target/WarehouseRack-1.0-SNAPSHOT.jar com.super.Main $1
+# - if python
+#   python3 $DIR/../main.py $1
+# - if ruby
+#   ruby $DIR/../main.rb $1
+# 
+# Important: Above commands is just examples, please modify to suit your requirement as necessary

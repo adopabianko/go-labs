@@ -1,0 +1,15 @@
+create_warehouse_rack 6
+rack ZG11AQA 2024-02-28
+rack SD92349WW 2024-02-28
+rack ZG748WDG 2024-03-15
+rack KA887YHJ 2024-01-21
+rack KA888YHH 2024-04-01
+rack DG8789YH 2024-03-15
+rack_out 4
+status
+rack DL654ASA 2024-02-28
+rack DO123UJU 2024-02-28
+sku_numbers_for_product_with_exp_date 2024-02-28
+slot_numbers_for_product_with_exp_date 2024-02-28
+slot_number_for_sku_number DG8789YH
+slot_number_for_sku_number AB8875WF
