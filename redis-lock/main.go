@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -144,5 +145,7 @@ func randomString(length int) string {
 	for i := 0; i < length; i++ {
 		result[i] = chars[rand.Intn(len(chars))]
 	}
-	return string(result)
+
+	// convert to lower case
+	return strings.ToLower(string(result))
 }
