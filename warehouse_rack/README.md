@@ -8,15 +8,15 @@
 
 Setup :
 ```bash
-bin/setup
+./bin/setup
 ```
 
 Run with input file:
 ```bash
-bin/warehouse_rack file_inputs.txt
+make read-file
 ```
 
 Run with command :
 ```bash
-bin/warehouse_rack
+make command
 ```
