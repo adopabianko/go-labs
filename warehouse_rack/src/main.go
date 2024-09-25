@@ -52,47 +52,61 @@ func (w *Warehouse) ReadFile(fileName string) {
 	r := bufio.NewScanner(file)
 	r.Split(bufio.ScanLines)
 
+	wh := &Warehouse{}
+
 	for r.Scan() {
 		readLineText := strings.Split(r.Text(), " ")
 
 		inputText := readLineText[0]
 
-		switch expression := inputText; expression {
-		case "create_warehouse_rack":
-			capacity := atoi(readLineText[1])
-			w = NewWarehouse(capacity)
-			fmt.Println("Created a warehouse rack with", capacity, "slots")
-		case "rack":
-			if w != nil {
-				fmt.Println(w.RackIn(readLineText[1], readLineText[2]))
-			}
-		case "rack_out":
-			if w != nil {
-				slot := atoi(readLineText[1])
-				fmt.Println(w.RackOut(slot))
-			}
-		case "status":
-			if w != nil {
-				fmt.Print(w.Status())
-			}
-
-		case "sku_numbers_for_product_with_exp_date":
-			if w != nil {
-				fmt.Println(w.SKUForExpDate(readLineText[1]))
-			}
-		case "slot_numbers_for_product_with_exp_date":
-			if w != nil {
-				fmt.Println(w.SlotForExpDate(readLineText[1]))
-			}
-		case "slot_number_for_sku_number":
-			if w != nil {
-				fmt.Println(w.SlotForSKU(readLineText[1]))
-			}
-		}
+		wh = processInput(inputText, readLineText, wh)
 	}
 }
 
+func processInput(inputText string, readLineText []string, w *Warehouse) *Warehouse {
+	switch expression := inputText; expression {
+	case "create_rack", "create_warehouse_rack":
+		capacity := atoi(readLineText[1])
+		w = NewWarehouse(capacity)
+		fmt.Println("Created a warehouse rack with", capacity, "slots")
+	case "rack":
+		if w != nil {
+			fmt.Println(w.RackIn(readLineText[1], readLineText[2]))
+		}
+	case "rack_out":
+		if w != nil {
+			slot := atoi(readLineText[1])
+			fmt.Println(w.RackOut(slot))
+		}
+	case "status":
+		if w != nil {
+			fmt.Print(w.Status())
+		}
+
+	case "sku_numbers_for_product_with_exp_date":
+		if w != nil {
+			fmt.Println(w.SKUForExpDate(readLineText[1]))
+		}
+	case "slot_numbers_for_product_with_exp_date":
+		if w != nil {
+			fmt.Println(w.SlotForExpDate(readLineText[1]))
+		}
+	case "slot_number_for_sku_number":
+		if w != nil {
+			fmt.Println(w.SlotForSKU(readLineText[1]))
+		}
+	case "exit":
+		os.Exit(1)
+	default:
+		fmt.Println("Unknown command")
+	}
+
+	return w
+}
+
 func (w *Warehouse) ReadCommand() {
+	wh := Warehouse{}
+
 	for {
 		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("> ")
@@ -100,42 +114,7 @@ func (w *Warehouse) ReadCommand() {
 		readLineText := strings.Split(strings.TrimSuffix(command, "\n"), " ")
 		inputText := readLineText[0]
 
-		switch expression := inputText; expression {
-		case "create_rack", "create_warehouse_rack":
-			capacity := atoi(readLineText[1])
-			w = NewWarehouse(capacity)
-			fmt.Println("Created a warehouse rack with", capacity, "slots")
-		case "rack":
-			if w != nil {
-				fmt.Println(w.RackIn(readLineText[1], readLineText[2]))
-			}
-		case "rack_out":
-			if w != nil {
-				slot := atoi(readLineText[1])
-				fmt.Println(w.RackOut(slot))
-			}
-		case "status":
-			if w != nil {
-				fmt.Print(w.Status())
-			}
-
-		case "sku_numbers_for_product_with_exp_date":
-			if w != nil {
-				fmt.Println(w.SKUForExpDate(readLineText[1]))
-			}
-		case "slot_numbers_for_product_with_exp_date":
-			if w != nil {
-				fmt.Println(w.SlotForExpDate(readLineText[1]))
-			}
-		case "slot_number_for_sku_number":
-			if w != nil {
-				fmt.Println(w.SlotForSKU(readLineText[1]))
-			}
-		case "exit":
-			os.Exit(1)
-		default:
-			fmt.Println("Unknown command")
-		}
+		wh = *processInput(inputText, readLineText, &wh)
 	}
 }
 
