@@ -87,7 +87,7 @@ func (c *config) process() {
 }
 
 func (c *config) dbConn() {
-	conn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "faker-postgres", 5432, "faker", "faker", "faker_customers")
+	conn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "faker-db", 5432, "faker", "faker", "faker_customers")
 	db, err := sqlx.Connect("postgres", conn)
 
 	if err != nil {

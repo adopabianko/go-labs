@@ -1,6 +1,6 @@
 services:
-  postgres:
-    container_name: faker-postgres
+  db:
+    container_name: faker-db
     image: postgres:latest
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
@@ -20,14 +20,14 @@ services:
     cpus: "0.5"
     networks:
       - faker-network
-  faker-app:
+  app:
     container_name: faker-app
     build: 
       dockerfile: ./Dockerfile
     networks:
       - faker-network
     depends_on:
-      postgres:
+      db:
         condition: service_healthy
 
 networks:
