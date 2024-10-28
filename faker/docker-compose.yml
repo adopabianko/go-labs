@@ -29,6 +29,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-
 networks:
-  faker-network: {}
+  faker-network:
+    name: faker-network
